@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import defaultPoutou from './poutou/default.png';
-import eatPoutou from './poutou/eat.gif';
-import drinkPoutou from './poutou/drink.gif';
+import eatPoutou from './poutou/miam.png';
+import drinkPoutou from './poutou/gloups.png';
 import './App.css';
 import useAnalyticsEventTracker from './useAnalyticsEventTracker';
 import ReactGA from 'react-ga';
@@ -13,30 +13,28 @@ function App() {
   const [letterContent, setLetterContent] = useState('');
   const [poutouImg, setPoutouImg] = useState(defaultPoutou);
   const [isPlaying, setIsPlaying] = useState(false);
-  let timeoutId = null;
   const gaEventTracker = useAnalyticsEventTracker('Contact us');
 
   const handleClick = (buttonName) => {
-   clearTimeout(timeoutId);
    switch(buttonName){
       case "eat":
         gaEventTracker('eat')
         setPoutouImg(eatPoutou)
-        timeoutId = setTimeout(() => {
+        setTimeout(() => {
           setPoutouImg(defaultPoutou)
-        }, 4500);
+        }, 700);
         break;
       case "drink":
         gaEventTracker('drink')
         setPoutouImg(drinkPoutou)
-        timeoutId = setTimeout(() => {
+        setTimeout(() => {
           setPoutouImg(defaultPoutou)
-        }, 4500);
+        }, 700);
         break;
       case "listen":
         gaEventTracker('listen')
         setIsPlaying(true)
-        timeoutId = setTimeout(() => {
+        setTimeout(() => {
           setIsPlaying(false)
         }, 5000);
         break;
@@ -66,13 +64,13 @@ function App() {
           </video>
         }
         <div style={{ marginTop: '20px', justifyContent:"center" }}>
-          <button onClick={() => handleClick('eat')} style={{ margin: '10px', padding: '10px 20px', background: 'linear-gradient(to right, #e66465, #9198e5)', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
+          <button id="btn_eat" onClick={() => handleClick('eat')} style={{ margin: '10px', padding: '10px 20px', background: 'linear-gradient(to right, #e66465, #9198e5)', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
             Nourris-moi
           </button>
-          <button onClick={() => handleClick('drink')} style={{ margin: '10px', padding: '10px 20px', background: 'linear-gradient(to right, #e66465, #9198e5)', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
+          <button id="btn_drink" onClick={() => handleClick('drink')} style={{ margin: '10px', padding: '10px 20px', background: 'linear-gradient(to right, #e66465, #9198e5)', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
             Donne-moi à boire
           </button>
-          <button onClick={() => handleClick('listen')} style={{ margin: '10px', padding: '10px 20px', background: 'linear-gradient(to right, #e66465, #9198e5)', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
+          <button id="btn_listen" onClick={() => handleClick('listen')} style={{ margin: '10px', padding: '10px 20px', background: 'linear-gradient(to right, #e66465, #9198e5)', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
             Écoute-moi
           </button>
         </div>
